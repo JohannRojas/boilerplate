@@ -1,7 +1,7 @@
-import { RTKProvider } from '@/Redux/provider';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import type { ReactElement, ReactNode } from 'react';
+import { Providers } from '../redux/provider';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -16,8 +16,9 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return getLayout(
-    <RTKProvider>
+    <Providers>
       <Component {...pageProps} />
-    </RTKProvider>
+
+    </Providers>
   );
 }
